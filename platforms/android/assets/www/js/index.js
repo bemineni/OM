@@ -43,6 +43,12 @@ var app = {
 
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
+        
+        //Instead of this
+        //google.maps.event.addDomListener(window, 'load', initialize);
+        lotus.init();
+        //lotus.googlemaps('map-canvas');
+        //google.maps.event.addDomListener(window, 'load', this.googlemaps());
 
         console.log('Received Event: ' + id);
     }
