@@ -5,7 +5,7 @@ iam( 'Meteron' ,['js/splash.js','js/log.js'] , function(splash,log){
 
 	var Meteron = (function() {
 
-		var settings = {
+		var appSettings = {
 				appName :"Auto and Cab charge calculator",
 				appAuthor : "Srikanth Bemineni",
 				windowWidth :  0 ,
@@ -17,10 +17,29 @@ iam( 'Meteron' ,['js/splash.js','js/log.js'] , function(splash,log){
 			this.init = function(){
 				//Lets set all the screen elements and also width of the html
 				//body 
-				settings.windowWidth = $(window).width();
-				settings.windowHeight = $(window).height();
+				appSettings.windowWidth = $(window).width();
+				appSettings.windowHeight = $(window).height();
+				//Lets initialize the splash screen
+				splash.init(this);
 			};
-
+			
+			this.settings = function(){
+				
+				return appSettings;
+			};
+			
+			this.register = function(){
+				
+				
+				//All controls for the home screen
+				$(document).on('pageinit','#home',function(evt){
+					iam( '',['js/home.js'],function(home){
+						home.init();
+					});
+				});
+				
+			};
+			
 			/*!
 			 * This function will set up the google maps.
 			 */

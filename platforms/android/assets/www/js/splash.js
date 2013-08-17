@@ -6,11 +6,13 @@ iam('splash',['js/log.js'],function(log){
 	var splash = (function(){
 		
 		    
+		     var PAGE = '#splash';
 		     function splash()
 		     {
-		    	 this.init = function(){
+		    	 this.init = function(meteron){
+		    		 
 		    		 log.info('Splash initialized');
-		    		 alert('splash initialized');
+		    		 $(PAGE).css('height',meteron.settings().windowHeight);
 		    	 };
 		    	 
 		    	 this.load = function(){
