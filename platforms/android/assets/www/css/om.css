@@ -6,8 +6,17 @@ body { height: 100%; margin: 0; padding: 0 }
 #map-canvas { height: 60px; }
 
 .stage{
-	background-image:url('../img/strip.png');
+	background-image:url('../img/stripe1.png');
     background-repeat:repeat;
 }
 
+.logo{
+	display:block;
+    margin-right:auto;
+    margin-left:auto;	
+}
 
+.navstripe{
+	background-image:url('../img/stripe2.png');
+    background-repeat:repeat;
+}

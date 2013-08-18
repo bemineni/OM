@@ -1,24 +1,32 @@
 <html>
-<title>Home</title>
+<title>Select Location</title>
 <body>
-	<!-- Start of second page -->
-	<div data-role="page" id="maps">
+    <div data-role="page" id="map" class="stage">
+        <div data-role="header" data-position="fixed" class="navstripe">
+            <h1>Meter On - Select Location</h1>
+        </div>
+        <!-- /header -->
+        <div data-role="content" style="padding:0;">
+           <div data-role="fieldcontain" style="margin-left:15px;">
+                <label for="location" class="ui-hidden-accessible">Find</label> 
+                <input type="text" name="location" id="location" value="" placeholder="Find location" />
+                <a id='done' href="#" data-inline="true" data-role="button" data-icon="check" >Done</a>
+            </div>
+           <div id="map-canvas" style="height: 100%" />
+        </div>
+        <!-- /content -->
+        <div data-role="footer" data-position="fixed" class="navstripe">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="home.html" >Home</a></li>
+                    <li><a href="about.html" class="ui-btn-active ui-state-persist">About</a></li>
+                </ul>
+            </div>
+            <!-- /navbar -->
 
-		<div data-role="header">
-			<h1>Select your location</h1>
-		</div>
-		<!-- /header -->
-
-		<div data-role="content">
-			<div id="map-canvas"></div>
-		</div>
-		<!-- /content -->
-
-		<div data-role="footer">
-			<h4>Page Footer</h4>
-		</div>
-		<!-- /footer -->
-	</div>
-	<!-- /page -->
+        </div>
+        <!-- /footer -->
+    </div>
+    <!-- /page -->
 </body>
 </html>

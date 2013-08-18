@@ -40,6 +40,9 @@
        FOR DEBUGGING IN A BROWSER ONLY
     -->
     <script type="text/javascript">
+        $(document).bind("mobileinit", function(){
+    	  $.mobile.touchOverflowEnabled = true;
+    	});
          lotus({},['js/meteron.js'],function(meteron){
                       meteron.init();
                       meteron.register();
@@ -52,8 +55,9 @@
 </head>
 <body>
     <div data-role="page" id="splash" class="stage">
-        <div data-role="content">
-            <a href="home.html"  data-theme="a" data-icon="home" data-role="button">Home</a>
+        <div data-role="content" style="min-height:inherit;">
+            <img src="img/taxi.png" class="logo">
+            
         </div>
     </div>
 </body>

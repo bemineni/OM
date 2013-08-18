@@ -1,6 +1,6 @@
 //OM
 //Srikanth Bemineni
-iam( 'Meteron' ,['js/splash.js','js/log.js'] , function(splash,log){
+iam( 'Meteron' ,['js/log.js','js/session.js'] , function(log,session){
 	"use strict";
 
 	var Meteron = (function() {
@@ -20,7 +20,8 @@ iam( 'Meteron' ,['js/splash.js','js/log.js'] , function(splash,log){
 				appSettings.windowWidth = $(window).width();
 				appSettings.windowHeight = $(window).height();
 				//Lets initialize the splash screen
-				splash.init(this);
+				//splash.init(this);
+				log.info('Meteron initialized');
 			};
 			
 			this.settings = function(){
@@ -29,27 +30,26 @@ iam( 'Meteron' ,['js/splash.js','js/log.js'] , function(splash,log){
 			};
 			
 			this.register = function(){
-				
-				
+					
 				//All controls for the home screen
+				$(document).on('pageinit','#splash',function(evt){
+					iam( '',['js/splash.js'],function(splash){
+						splash.init();
+					});
+				});
+				
 				$(document).on('pageinit','#home',function(evt){
 					iam( '',['js/home.js'],function(home){
 						home.init();
 					});
 				});
 				
-			};
-			
-			/*!
-			 * This function will set up the google maps.
-			 */
-			this.googlemaps = function( id ){
-				var mapOptions = {
-						center: new google.maps.LatLng(-34.397, 150.644),
-						zoom: 8,
-						mapTypeId: google.maps.MapTypeId.ROADMAP
-				};
-				var map = new google.maps.Map(document.getElementById(id), mapOptions);
+				$(document).on('pageinit','#map',function(evt){
+					iam( '',['js/map.js'],function(map){
+						map.init();
+					});
+				});
+				
 			};
 
 		}
