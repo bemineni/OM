@@ -19,8 +19,6 @@ iam( 'Meteron' ,['js/log.js','js/session.js'] , function(log,session){
 				//body 
 				appSettings.windowWidth = $(window).width();
 				appSettings.windowHeight = $(window).height();
-				//Lets initialize the splash screen
-				//splash.init(this);
 				log.info('Meteron initialized');
 			};
 			
@@ -49,6 +47,10 @@ iam( 'Meteron' ,['js/log.js','js/session.js'] , function(log,session){
 						map.init();
 					});
 				});
+				
+				//We will start loading once all our pageinit's are setup
+				// This will make sure we have guaranteed initialization 
+				$.mobile.initializePage();
 				
 			};
 
