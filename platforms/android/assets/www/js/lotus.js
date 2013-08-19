@@ -47,7 +47,7 @@ var iam = null;
 	var config = {};
 	
 	/*!  Console to print messages  */
-	console =  window.console ? window.console : null;
+	var console =  window.console ? window.console : null;
 
 	/*! Module storage structure */
 	function module()

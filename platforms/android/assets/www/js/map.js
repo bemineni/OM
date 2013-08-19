@@ -71,7 +71,7 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 							zoom: 8,
 							mapTypeId: google.maps.MapTypeId.ROADMAP
 					};
-					this.map = new google.maps.Map(document.getElementById(id), mapOptions);
+					this.map = new google.maps.Map(document.getElementById(id), this.mapOptions);
 				};
 				
 				this.idealContentHeight = function(){

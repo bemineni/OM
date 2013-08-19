@@ -30,24 +30,30 @@
 	<script type="text/javascript" src="js/lotus.js"></script>
 	<!-- 
        ENABLE THIS TO ACITVATE PHONEGAP
-            <script src="cordova.js"></script>
-            <script type="text/javascript">
-                app.initialize();
-            </script>
-            <script type="text/javascript" src="js/index.js"></script> 
+     
+         
+    <script src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+           app.initialize();
+    </script>
     -->
+          
+    
     <!--
        FOR DEBUGGING IN A BROWSER ONLY
     -->
     <script type="text/javascript">
         $(document).bind("mobileinit", function(){
     	  $.mobile.touchOverflowEnabled = true;
+    	  $.mobile.defaultPageTransition = 'slide';
     	});
          lotus({},['js/meteron.js'],function(meteron){
                       meteron.init();
                       meteron.register();
                   });
     </script>
+    
 	<script src="js/jquery.mobile-1.3.1.js"></script>
 	<script type="text/javascript"
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpqy9OAuQzG4romb7bpYtd56ruohzG7M0&sensor=false"></script>

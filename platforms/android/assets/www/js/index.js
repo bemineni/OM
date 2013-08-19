@@ -37,18 +37,22 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+        //var parentElement = document.getElementById(id);
+        //var listeningElement = parentElement.querySelector('.listening');
+        //var receivedElement = parentElement.querySelector('.received');
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+        //listeningElement.setAttribute('style', 'display:none;');
+        //receivedElement.setAttribute('style', 'display:block;');
         
         //Instead of this
-        //google.maps.event.addDomListener(window, 'load', initialize);
-        lotus.init();
-        //lotus.googlemaps('map-canvas');
-        //google.maps.event.addDomListener(window, 'load', this.googlemaps());
+        $(document).bind("mobileinit", function(){
+      	  $.mobile.touchOverflowEnabled = true;
+      	  $.mobile.defaultPageTransition = 'slide';
+      	});
+        lotus({},['js/meteron.js'],function(meteron){
+                        meteron.init();
+                        meteron.register();
+                    });
 
         console.log('Received Event: ' + id);
     }
