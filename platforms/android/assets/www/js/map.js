@@ -10,6 +10,7 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 		     var DONE = '#done';
 		     var LOCATION = '#location';
 		     var MAPCANVAS = 'map-canvas';
+		     var FINDME = '#find-me';
 		     
 		     function map()
 		     {
@@ -41,7 +42,13 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 			    			 session.to = $(LOCATION).val();
 			    		 }	   
 		    			 $.mobile.changePage('home.html');
-		    		 })
+		    		 });
+		    		 
+		    		 $(FINDME).click(function(e){
+		    			 e.stopImmediatePropagation();
+		    			 e.preventDefault();
+		    			 navigator.geolocation.getCurrentPosition(onGeolocationSuccess, onGeolocationError);
+		    		 });
 		    		 
 		    		 var canvasHeight = self.idealContentHeight()-$("div[data-role='fieldcontain']").first().outerHeight(true);
 		    		 $('#' + MAPCANVAS).css('height',canvasHeight);
@@ -79,6 +86,16 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 					var unimportantHeight = $( "div[data-role='header']" ).first().outerHeight(true) + $( "div[data-role='footer']" ).first().outerHeight(true);
 					var contentHeight = $('body').outerHeight() - unimportantHeight;
 					return contentHeight;
+				}
+				
+				function onGeolocationSuccess(position)
+				{
+					
+				}
+				
+				function onGeolocationError(error)
+				{
+					
 				}
 		    	 
 		    	

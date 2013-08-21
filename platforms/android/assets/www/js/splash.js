@@ -1,5 +1,5 @@
 //OM
-
+//Srikanth Bemineni
 iam('splash',['js/meteron.js','js/log.js'],function(meteron,log){
 		"use strict";
 		

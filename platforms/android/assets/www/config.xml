@@ -7,7 +7,7 @@
     <author email="dev@callback.apache.org" href="http://cordova.io">
         Apache Cordova Team
     </author>
-    <access origin="*" />
+    <access origin="*" subdomains="true"/>
     <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="true" />
     <preference name="show-splash-screen-spinner" value="true" />
@@ -15,6 +15,6 @@
     <icon src="icons/android/mdpi.png" gap:platform="android" gap:density="mdpi" />   
     <icon src="icons/android/hdpi.png" gap:platform="android" gap:density="hdpi" />
     <icon src="icons/android/xhdpi.png" gap:platform="android" gap:density="xhdpi" />
+    <plugin name="Geolocation" value="org.apache.cordova.GeoBroker" />
     <content src="index.html" />
-    <access origin="*" />
 </widget>

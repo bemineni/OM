@@ -52,6 +52,8 @@ iam( 'Meteron' ,['js/log.js','js/session.js'] , function(log,session){
 				// This will make sure we have guaranteed initialization 
 				$.mobile.initializePage();
 				
+				log.info('Meteron registeration complete');
+				
 			};
 
 		}
