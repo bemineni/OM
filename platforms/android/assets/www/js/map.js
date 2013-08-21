@@ -47,7 +47,9 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 		    		 $(FINDME).click(function(e){
 		    			 e.stopImmediatePropagation();
 		    			 e.preventDefault();
-		    			 navigator.geolocation.getCurrentPosition(onGeolocationSuccess, onGeolocationError);
+		    			 navigator.geolocation.getCurrentPosition(onGeolocationSuccess, 
+		    					                           onGeolocationError,
+		    					                           { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });
 		    		 });
 		    		 
 		    		 var canvasHeight = self.idealContentHeight()-$("div[data-role='fieldcontain']").first().outerHeight(true);
@@ -90,12 +92,20 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 				
 				function onGeolocationSuccess(position)
 				{
-					
+					log.info('Latitude: '          + position.coords.latitude          + '\n' +
+					          'Longitude: '         + position.coords.longitude         + '\n' +
+					          'Altitude: '          + position.coords.altitude          + '\n' +
+					          'Accuracy: '          + position.coords.accuracy          + '\n' +
+					          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+					          'Heading: '           + position.coords.heading           + '\n' +
+					          'Speed: '             + position.coords.speed             + '\n' +
+					          'Timestamp: '         + position.timestamp                + '\n');
 				}
 				
 				function onGeolocationError(error)
 				{
-					
+					log.error('code: '    + error.code    + '\n' +
+			                  'message: ' + error.message + '\n');
 				}
 		    	 
 		    	

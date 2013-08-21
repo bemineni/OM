@@ -38,18 +38,8 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         
-        //Instead of this
-        $(document).bind("mobileinit", function(){
-      	  $.mobile.touchOverflowEnabled = true;
-      	  $.mobile.defaultPageTransition = 'slide';
-      	});
-        $(document).ready(function() {
-    		lotus({}, [ 'js/meteron.js' ], function(meteron) {
-    			meteron.init();
-    			meteron.register();
-    		});
-    	});
-
+        
+        CDR.resolve();
         console.log('Received Event: ' + id);
     }
 };
