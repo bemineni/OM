@@ -29,8 +29,7 @@ public class OM extends DroidGap
     {
         super.onCreate(savedInstanceState);
         // Set by <content src="index.html" /> in config.xml
-        String url = Config.getStartUrl();
-        super.loadUrl(url);
+        super.loadUrl(Config.getStartUrl());
         //super.loadUrl("file:///android_asset/www/index.html")
     }
 }
