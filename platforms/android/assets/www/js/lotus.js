@@ -258,7 +258,13 @@ var iam = null;
 	 */
 	function is_module_getting_processed(depmod)
 	{
-		return (unprocessedQueue.indexOf(depmod) != -1);
+		var i=0;
+		for( ; i < unprocessedQueue.length ; i++ )
+		{
+		     if(unprocessedQueue[i].modulesrc === depmod)
+		    	 return true;
+		}
+		return false;
 	}//is_module_getting_processed
 
 	
@@ -434,7 +440,12 @@ var iam = null;
 		if(unprocessedQueue.length != 0)
 		{
 			//We will process all the scripts one by one.
-			var mod = unprocessedQueue.shift();
+			var mod=null;
+			if(unprocessedQueue.length == 1){
+				mod = unprocessedQueue.pop();
+			}else{
+				mod = unprocessedQueue.shift();
+			}
 			loadModule(mod);
 			loadedModule = null;
 		}

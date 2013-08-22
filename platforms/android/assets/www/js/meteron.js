@@ -55,6 +55,23 @@ iam( 'Meteron' ,['js/log.js','js/session.js'] , function(log,session){
 				log.info('Meteron registeration complete');
 				
 			};
+			
+			this.getConnection = function(){
+				 return navigator.connection.type;
+			};
+			
+			this.getConnectionStates = function(){
+				var states = {};
+			    states[Connection.UNKNOWN]  = 'Unknown connection';
+			    states[Connection.ETHERNET] = 'Ethernet connection';
+			    states[Connection.WIFI]     = 'WiFi connection';
+			    states[Connection.CELL_2G]  = 'Cell 2G connection';
+			    states[Connection.CELL_3G]  = 'Cell 3G connection';
+			    states[Connection.CELL_4G]  = 'Cell 4G connection';
+			    states[Connection.CELL]     = 'Cell generic connection';
+			    states[Connection.NONE]     = 'No network connection';
+			    return states;
+			};
 
 		}
 		return new Meteron();

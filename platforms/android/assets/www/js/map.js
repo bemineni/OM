@@ -22,6 +22,8 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 		    		 
 		    		 $( MAP ).on( "pageshow", this.show);
 		    		 $( MAP ).on( "pagehide", this.hide);
+		    		 
+		    		 
 		    	 };
 		    	 
 		    	 this.show = function(){
@@ -64,7 +66,6 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 		    	 this.hide = function(){
 		    		 $(DONE).unbind();
 		    		 $( MAP ).off( "pageshow", self.show);
-		    		 $( MAP ).off( "updatelayout", self.load);
 		    		 $( MAP ).off( "pagehide", self.hide);
 		    		 
 		    		 log.info('Map page hidden');
