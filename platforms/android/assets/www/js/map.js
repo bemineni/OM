@@ -49,7 +49,7 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 		    			 e.preventDefault();
 		    			 navigator.geolocation.getCurrentPosition(onGeolocationSuccess, 
 		    					                           onGeolocationError,
-		    					                           { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });
+		    					                           {enableHighAccuracy: true });
 		    		 });
 		    		 
 		    		 var canvasHeight = self.idealContentHeight()-$("div[data-role='fieldcontain']").first().outerHeight(true);
