@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <title>Select Location</title>
 <body>
@@ -5,17 +6,19 @@
         <div data-role="header" data-position="fixed" class="navstripe">
             <h1>Meter On - Select Location</h1>
         </div>
-        <!-- /header -->
+        <!-- header -->
         <div data-role="content" style="padding:0;">
-           <div data-role="fieldcontain" style="margin-left:15px;">
+           <div data-role="fieldcontain">
                 <label for="location" class="ui-hidden-accessible">Find</label> 
-                <input type="text" name="location" id="location" value="" placeholder="Find location" />
-                <a id='done' href="#" data-inline="true" data-role="button" data-mini="true" data-icon="check" >Done</a>
-                <a id="find-me" href="#" data-role="button" data-icon="circle-in" data-iconpos="notext">find me</a>
+                <input type="text" name="location" id="location" value="" data-mini="true" placeholder="Find location" />
+           </div>
+           <div class="ui-grid-a">
+                <div class="ui-block-a"><div align="left"><a id="find-me" href="#" data-role="button" data-icon="circle-in" data-iconpos="notext">find me</a></div></div>
+                <div class="ui-block-b"><div align="right"><a id='done' href="#" data-inline="true" data-role="button" data-mini="true" data-icon="check" >Done</a></div></div>
             </div>
-           <div id="map-canvas" style="height: 100%" />
+           <div id="map-canvas" style="height:100%;"></div>
         </div>
-        <!-- /content -->
+        <!-- content -->
         <div data-role="footer" data-position="fixed" class="navstripe">
             <div data-role="navbar">
                 <ul>
@@ -24,7 +27,6 @@
                 </ul>
             </div>
             <!-- /navbar -->
-
         </div>
         <!-- /footer -->
     </div>

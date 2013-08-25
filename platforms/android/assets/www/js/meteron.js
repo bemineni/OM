@@ -19,6 +19,11 @@ iam( 'Meteron' ,['js/log.js','js/session.js'] , function(log,session){
 				//body 
 				appSettings.windowWidth = $(window).width();
 				appSettings.windowHeight = $(window).height();
+				
+				document.addEventListener("pause", this.appPaused, false);
+				document.addEventListener("resume", this.appResumed, false);
+				document.addEventListener("backbutton", this.backButtonPressed, false);
+				
 				log.info('Meteron initialized');
 			};
 			
@@ -78,7 +83,22 @@ iam( 'Meteron' ,['js/log.js','js/session.js'] , function(log,session){
 			    states[Connection.NONE]     = 'No network connection';
 			    
 				return states[navigator.connection.type] != states[Connection.NONE]
-			};
+		   };
+		   
+		   this.appPaused = function(){
+			   //We will start the tracking timer  
+			   $.mobile.changePage($('#splash'),{});
+			   log.info('App paused');
+		   };
+		   
+		   this.appResumed = function(){
+			  //We will stop the tracking timer
+			   log.info('App resumed');
+		   };
+		   
+		   this.backButtonPressed = function(){
+			   window.history.back();
+		   };
 
 		}
 		return new Meteron();

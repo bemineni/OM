@@ -63,8 +63,7 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 		    					                           {enableHighAccuracy: true });
 		    		 });
 		    		 
-		    		 var canvasHeight = self.idealContentHeight()-$("div[data-role='fieldcontain']").first().outerHeight(true);
-		    		 $('#' + MAPCANVAS).css('height',canvasHeight);
+		    		 $('#' + MAPCANVAS).css('height',self.idealMapHeight());
 		    		 
 		    		
 		    		 
@@ -122,11 +121,13 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 					this.map = new google.maps.Map(document.getElementById(id), this.mapOptions);
 				};
 				
-				this.idealContentHeight = function(){
-					
-					var unimportantHeight = $( "div[data-role='header']" ).first().outerHeight(true) + $( "div[data-role='footer']" ).first().outerHeight(true);
-					var contentHeight = $('body').outerHeight() - unimportantHeight;
-					return contentHeight;
+				this.idealMapHeight = function(){
+				    var context = $(MAP);	
+					var unimportantHeight = $( "div[data-role='header']" ,context ).first().outerHeight(true); 
+					unimportantHeight += $( "div[data-role='footer']",context ).first().outerHeight(true);
+					var elementheight = ($("div[data-role='fieldcontain']",context).first().outerHeight(true); 
+				    elementheight += $(".ui-grid-a",context).first().outerHeight(true));
+					return ( $(window).outerHeight(true) - (unimportantHeight + elementheight));
 				}
 				
 				this.onGeolocationSuccess = function(position)

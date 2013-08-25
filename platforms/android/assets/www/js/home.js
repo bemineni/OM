@@ -8,7 +8,7 @@ iam('home',['js/meteron.js','js/log.js', 'js/session.js'],
 		
 		     var HOME = '#home';
 		     var FROMBUTTON = '#from-search';
-		     var TOBUTTON = '#to-button';
+		     var TOBUTTON = '#to-search';
 		     
 		     function home()
 		     {
