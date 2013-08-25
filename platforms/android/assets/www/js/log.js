@@ -1,5 +1,5 @@
 //OM
-//Srikanth Bemineni
+//Srikanth Bemineni srikanth.bemineni@gmail.com
 iam( 'Log' ,[] , function(){
 	"use strict";
 

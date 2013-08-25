@@ -1,5 +1,6 @@
 //OM
-//Srikanth Bemineni
+//Srikanth Bemineni srikanth.bemineni@gmail.com
+
 iam('splash',['js/meteron.js','js/log.js'],function(meteron,log){
 		"use strict";
 		

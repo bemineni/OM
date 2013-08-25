@@ -1,4 +1,5 @@
 //OM
+//Srikanth Bemineni srikanth.bemineni@gmail.com
 
 //Because of stupid google maps call api
 function maploaded()
@@ -57,8 +58,8 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 		    		 $(FINDME).click(function(e){
 		    			 e.stopImmediatePropagation();
 		    			 e.preventDefault();
-		    			 navigator.geolocation.getCurrentPosition(onGeolocationSuccess, 
-		    					                           onGeolocationError,
+		    			 navigator.geolocation.getCurrentPosition(self.onGeolocationSuccess, 
+		    					                           self.onGeolocationError,
 		    					                           {enableHighAccuracy: true });
 		    		 });
 		    		 
@@ -128,8 +129,11 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 					return contentHeight;
 				}
 				
-				function onGeolocationSuccess(position)
+				this.onGeolocationSuccess = function(position)
 				{
+					var myLatlng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+					
+					
 					log.info('Latitude: '          + position.coords.latitude          + '\n' +
 					          'Longitude: '         + position.coords.longitude         + '\n' +
 					          'Altitude: '          + position.coords.altitude          + '\n' +
@@ -138,13 +142,22 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 					          'Heading: '           + position.coords.heading           + '\n' +
 					          'Speed: '             + position.coords.speed             + '\n' +
 					          'Timestamp: '         + position.timestamp                + '\n');
-				}
+										
+					self.map.setCenter(myLatlng);
+					 
+					self.marker = new google.maps.Marker({
+					      position: myLatlng,
+					      map: self.map,
+					      title: 'Current location'
+					  });
+
+				};
 				
-				function onGeolocationError(error)
+				this.onGeolocationError = function(error)
 				{
 					log.error('code: '    + error.code    + '\n' +
 			                  'message: ' + error.message + '\n');
-				}
+				};
 		    	 
 		    	
 		     }

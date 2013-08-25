@@ -1,5 +1,5 @@
 //OM
-
+//Srikanth Bemineni srikanth.bemineni@gmail.com
 iam('session',['js/log.js'],function(log){
 		"use strict";
 		

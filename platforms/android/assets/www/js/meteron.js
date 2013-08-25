@@ -1,5 +1,5 @@
 //OM
-//Srikanth Bemineni
+//Srikanth Bemineni srikanth.bemineni@gmail.com
 iam( 'Meteron' ,['js/log.js','js/session.js'] , function(log,session){
 	"use strict";
 
@@ -65,7 +65,7 @@ iam( 'Meteron' ,['js/log.js','js/session.js'] , function(log,session){
 			this.isNetworkAvailable = function(){
 				
 				if(browserMode)
-					return false;
+					return true;
 				
 				var states = {};
 			    states[Connection.UNKNOWN]  = 'Unknown connection';
@@ -77,7 +77,7 @@ iam( 'Meteron' ,['js/log.js','js/session.js'] , function(log,session){
 			    states[Connection.CELL]     = 'Cell generic connection';
 			    states[Connection.NONE]     = 'No network connection';
 			    
-				return state[navigator.connection.type] == states[Connection.NONE]
+				return states[navigator.connection.type] != states[Connection.NONE]
 			};
 
 		}
