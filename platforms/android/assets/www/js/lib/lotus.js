@@ -278,7 +278,10 @@ var iam = null;
 	 */
 	function createModule(mod , params)
 	{
-		return mod.callBack.apply(null, params);
+		if(mod.callBack)
+			return mod.callBack.apply(null, params);
+		else
+			return null;
 	}//createModule
 	
 
@@ -343,31 +346,41 @@ var iam = null;
 		 * If the loadModule is empty, then script doesn't contain
 		 * the iam module. 
 		 */
+		//Lets create a new module
+		mod = new module();
+		
+		/*
+		 * check if this loaded module's dependencies are all loaded.
+		 */
 		if(loadedModule)
 		{
-			/*
-			 * check if this loaded module's dependencies are all loaded.
-			 */ 
-			//Lets create a new module
-			mod = new module();
 			mod.depends = loadedModule.depends;
 			mod.callBack = loadedModule.callBack;
-			mod.loaded = true;
 			mod.className = loadedModule.className;
-			mod.fileName = scriptnode.getAttribute('data-module');
-			mod.context = context;
-			_modules[mod.fileName] = mod;
+		}
+		else
+		{
+			//These are not iam modules. 
+			//Ex., jQuery
+			mod.depends = [];
+			mod.callBack = null;
+			//filename as class name
+			mod.className = scriptnode.getAttribute('data-module');
+		}
+		mod.loaded = true;
+		mod.fileName = scriptnode.getAttribute('data-module');
+		mod.context = context;
+		_modules[mod.fileName] = mod;
 		
-		    //Lets check if all the dependent modules are loaded an get 
-			//the params
-			var params = prepareDependents(mod);
-			if( params.length == mod.depends.length )
-			{
-					mod.instance = createModule(mod,params);
-					mod.initialized = true;
-					loadComplete = true;
-			}
-		}//onLoadSucess
+		//Lets check if all the dependent modules are loaded an get 
+		//the params
+		var params = prepareDependents(mod);
+		if( params.length == mod.depends.length )
+		{
+			mod.instance = createModule(mod,params);
+			mod.initialized = true;
+			loadComplete = true;
+		}
 		
 		currentContext = null;
 
@@ -380,7 +393,7 @@ var iam = null;
 			 * Fill up the dependencies if the other modules are waiting
 			 * for this module and initialize that module
 			 */
-			callAllDepedendentModules(mod.fileName);
+			callAllDependentModules(mod.fileName);
 		}
 
 		/*
@@ -397,7 +410,7 @@ var iam = null;
 	 * We go doing this until all the dependencies completed modules are loaded
 	 * or until we  have completed loading all the modules up to the root level.
 	 */
-	function callAllDepedendentModules()
+	function callAllDependentModules()
 	{
 		var i = 0;	
 		var mod = null;

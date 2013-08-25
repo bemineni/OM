@@ -48,6 +48,12 @@ iam( 'Meteron' ,['js/log.js','js/session.js'] , function(log,session){
 					});
 				});
 				
+				$(document).on('pageinit','#adialog',function(evt){
+					iam( '',['js/dialog.js'],function(dialog){
+						dialog.init();
+					});
+				});
+				
 				//We will start loading once all our pageinit's are setup
 				// This will make sure we have guaranteed initialization 
 				$.mobile.initializePage();
@@ -55,12 +61,12 @@ iam( 'Meteron' ,['js/log.js','js/session.js'] , function(log,session){
 				log.info('Meteron registeration complete');
 				
 			};
-			
-			this.getConnection = function(){
-				 return navigator.connection.type;
-			};
-			
-			this.getConnectionStates = function(){
+				
+			this.isNetworkAvailable = function(){
+				
+				if(browserMode)
+					return false;
+				
 				var states = {};
 			    states[Connection.UNKNOWN]  = 'Unknown connection';
 			    states[Connection.ETHERNET] = 'Ethernet connection';
@@ -70,7 +76,8 @@ iam( 'Meteron' ,['js/log.js','js/session.js'] , function(log,session){
 			    states[Connection.CELL_4G]  = 'Cell 4G connection';
 			    states[Connection.CELL]     = 'Cell generic connection';
 			    states[Connection.NONE]     = 'No network connection';
-			    return states;
+			    
+				return state[navigator.connection.type] == states[Connection.NONE]
 			};
 
 		}

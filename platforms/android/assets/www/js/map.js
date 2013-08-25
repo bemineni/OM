@@ -1,5 +1,13 @@
 //OM
 
+//Because of stupid google maps call api
+function maploaded()
+{
+	iam("",['js/map.js'],function(map){
+		map.googleMapsLoaded();
+	});
+}
+
 iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 		function(meteron,log,session){
 		"use strict";
@@ -11,6 +19,7 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 		     var LOCATION = '#location';
 		     var MAPCANVAS = 'map-canvas';
 		     var FINDME = '#find-me';
+		     var MAPSCRIPT = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDpqy9OAuQzG4romb7bpYtd56ruohzG7M0&sensor=false&callback=maploaded";
 		     
 		     function map()
 		     {
@@ -22,7 +31,6 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 		    		 
 		    		 $( MAP ).on( "pageshow", this.show);
 		    		 $( MAP ).on( "pagehide", this.hide);
-		    		 
 		    		 
 		    	 };
 		    	 
@@ -57,7 +65,30 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 		    		 var canvasHeight = self.idealContentHeight()-$("div[data-role='fieldcontain']").first().outerHeight(true);
 		    		 $('#' + MAPCANVAS).css('height',canvasHeight);
 		    		 
-		    		 self.googlemaps(MAPCANVAS);
+		    		
+		    		 
+		    		 if(typeof google === "undefined" && meteron.isNetworkAvailable())
+		    		 {
+		    		     //The google map script has not yet been loaded
+		    			 //This will call global maploaded function
+		    			 iam( "", [MAPSCRIPT] , function(){} );
+		    		 }
+		    		 else if(typeof google !== "undefined" && meteron.isNetworkAvailable()) {
+		    			 self.googlemaps(MAPCANVAS);
+		    		 }
+		    		 else
+		    		 {
+		    			 //Network is not available
+		    			 session.showInfo = {
+			    				 type:"error",
+			    				 title:"Network connection error",
+			    				 message:"No network connection available to " +
+			    				 		"access maps",
+			    				 url:"home.html"
+			    		 };
+		    			 $.mobile.changePage( "dialog.html", { role: "dialog" } );
+		    			 
+		    		 }
 		    		 
 		    		 log.info('Map page loaded');
 		    		 
@@ -69,6 +100,12 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 		    		 $( MAP ).off( "pagehide", self.hide);
 		    		 
 		    		 log.info('Map page hidden');
+		    	 };
+		    	 
+		    	 this.googleMapsLoaded = function()
+		    	 {
+		    		 self.googlemaps(MAPCANVAS);
+		    		 log.info("Google map scripts loaded");
 		    	 };
 		    	 
 		    	 /*!
