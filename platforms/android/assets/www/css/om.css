@@ -21,6 +21,41 @@ body { height: 100%; margin: 0; padding: 0 }
     background-repeat:repeat;
 }
 
+.ontop{
+	position:absolute;
+	z-index:1;
+}
+
+.overlayinput{
+	width:100%;
+	margin-left:10px;
+	margin:0;
+}
+
+.overlayscreen{
+	width:100%;
+    top:0px;
+    left:0px;
+    margin:0;
+    overflow:auto;
+}
+
+.overlaydyna{
+	margin-left:1em;
+	margin-right:1em;
+}
+
+.findme{
+	margin:-50px 0 0 15px;
+	padding:0 0 0 0;
+	
+}
+
+.ontopplus{
+    position:absolute;
+    z-index:2;
+}
+
 .ui-icon-circle-in {
         background-image: url("../img/30-circle-in.png");
         background-color:white;

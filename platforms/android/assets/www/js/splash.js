@@ -17,7 +17,8 @@ iam('splash',['js/meteron.js','js/log.js'],function(meteron,log){
 		    		 
 		    		 log.info('Splash initialized');
 		    		 appSettings = meteron.settings();
-		    		 //$('img',$(PAGE)).css('margin-top',(appSettings.windowHeight/4));
+		    		 $('img',$(PAGE)).css('margin-top',(appSettings.windowHeight/5));
+		    		 
 		    		 $( PAGE ).on( "pageshow", this.show);
 		    		 $( PAGE ).on( "pagehide", this.hide);
 		    		 //We will miss the first pageshow. so starting for the

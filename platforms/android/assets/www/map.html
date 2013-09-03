@@ -2,34 +2,52 @@
 <html>
 <title>Select Location</title>
 <body>
-    <div data-role="page" id="map" class="stage">
-        <div data-role="header" data-position="fixed" class="navstripe">
-            <h1>Meter On - Select Location</h1>
-        </div>
-        <!-- header -->
-        <div data-role="content" style="padding:0;">
-           <div data-role="fieldcontain">
-                <label for="location" class="ui-hidden-accessible">Find</label> 
-                <input type="text" name="location" id="location" value="" data-mini="true" placeholder="Find location" />
-           </div>
-           <div class="ui-grid-a">
-                <div class="ui-block-a"><div align="left"><a id="find-me" href="#" data-role="button" data-icon="circle-in" data-iconpos="notext">find me</a></div></div>
-                <div class="ui-block-b"><div align="right"><a id='done' href="#" data-inline="true" data-role="button" data-mini="true" data-icon="check" >Done</a></div></div>
-            </div>
-           <div id="map-canvas" style="height:100%;"></div>
-        </div>
-        <!-- content -->
-        <div data-role="footer" data-position="fixed" class="navstripe">
-            <div data-role="navbar">
-                <ul>
-                    <li><a href="home.html" >Home</a></li>
-                    <li><a href="about.html" class="ui-btn-active ui-state-persist">About</a></li>
-                </ul>
-            </div>
-            <!-- /navbar -->
-        </div>
-        <!-- /footer -->
-    </div>
-    <!-- /page -->
+	<div data-role="page" id="map" class="stage">
+		<div data-role="header" data-position="fixed" class="navstripe">
+			<h1>Meter On - Select Location</h1>
+		</div>
+		<!-- header -->
+		<div data-role="content" style="padding: 0; position: relative;">
+		    <div id="overlay" class="ontopplus overlayscreen stage">
+		          <div id="overlay-inputset" class="ontop overlayinput">
+                    <div data-role="fieldcontain" style="margin-left:1em;">
+                        <label for="overlay-location" class="ui-hidden-accessible">Find</label>
+                        <input  type="text" name="overlay-location" id="overlay-location" value="" data-mini="true" placeholder="Find location"/> 
+                        <a id='overlay-done' href="#" data-inline="true" data-role="button" data-mini="true" data-icon="check">Done</a>
+                    </div>
+                </div>
+		      <div id="overlaydynamic" class="overlaydyna">
+		         <ul id="predictions" data-role="listview" data-inset="true">
+                 </ul>
+                 
+		      </div>
+		    </div>
+		    
+			<div id="inputoverlay" class="ontop overlayinput">
+				<div data-role="fieldcontain" style="margin-left:1em;">
+					<label for="location" class="ui-hidden-accessible">Find</label>
+                        <input 	type="text" name="location" id="location" value="" data-mini="true" placeholder="Find location"/> 
+                        <a id='done' href="#" data-inline="true" data-role="button" data-mini="true" data-icon="check">Done</a>
+				</div>
+			</div>
+			<div id="map-canvas" style="height: 100%;"></div>
+			<div align="left" class="ontop findme">
+				<a id="find-me" href="#" data-role="button" data-icon="circle-in"
+					data-iconpos="notext">find me</a>
+			</div>
+		</div>
+		<div data-role="footer" data-position="fixed" class="navstripe">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="home.html">Home</a></li>
+					<li><a href="about.html"
+						class="ui-btn-active ui-state-persist">About</a></li>
+				</ul>
+			</div>
+			<!-- /navbar -->
+		</div>
+		<!-- /footer -->
+	</div>
+	<!-- /page -->
 </body>
 </html>

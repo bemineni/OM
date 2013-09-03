@@ -10,6 +10,7 @@ iam( 'Meteron' ,['js/log.js','js/session.js'] , function(log,session){
 				appAuthor : "Srikanth Bemineni",
 				windowWidth :  0 ,
 				windowHeight : 0 ,
+				version:"1.0"
 		};
 
 		function Meteron()
@@ -87,12 +88,12 @@ iam( 'Meteron' ,['js/log.js','js/session.js'] , function(log,session){
 		   
 		   this.appPaused = function(){
 			   //We will start the tracking timer  
-			   $.mobile.changePage($('#splash'),{});
 			   log.info('App paused');
 		   };
 		   
 		   this.appResumed = function(){
 			  //We will stop the tracking timer
+			   $.mobile.changePage($('#splash'),{});
 			   log.info('App resumed');
 		   };
 		   
