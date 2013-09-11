@@ -27,9 +27,7 @@ body { height: 100%; margin: 0; padding: 0 }
 }
 
 .overlayinput{
-	width:100%;
-	margin-left:10px;
-	margin:0;
+	overflow:auto;
 }
 
 .overlayscreen{

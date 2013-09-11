@@ -25,6 +25,8 @@ iam( 'Meteron' ,['js/log.js','js/session.js'] , function(log,session){
 				document.addEventListener("resume", this.appResumed, false);
 				document.addEventListener("backbutton", this.backButtonPressed, false);
 				
+				
+				
 				log.info('Meteron initialized');
 			};
 			
@@ -100,6 +102,13 @@ iam( 'Meteron' ,['js/log.js','js/session.js'] , function(log,session){
 		   this.backButtonPressed = function(){
 			   window.history.back();
 		   };
+		   
+		   this.openUrl = function(pattern){
+			   if(browserMode)
+				   window.open($(pattern).attr("href"), "_system");
+			   else
+				   navigator.app.loadUrl($(pattern).attr("href"), {openExternal: true});
+		   }
 
 		}
 		return new Meteron();

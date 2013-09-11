@@ -5,6 +5,7 @@
 function maploaded()
 {
 	iam("",['js/map.js'],function(map){
+		google.maps.visualRefresh = true;
 		map.googleMapsLoaded();
 	});
 }
@@ -17,6 +18,7 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 		
 		     var MAP = '#map';
 		     var DONE = '#done';
+		     var INPUTOVERLAY = '#inputoverlay';
 		     var LOCATION = '#location';
 		     var OVERLAYLOCATION = '#overlay-location';
 		     var OVERLAYINPUTSET = '#overlay-inputset';
@@ -69,12 +71,19 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 		    		 
 		    		 log.info('Map screen initialized');
 		    		 
+		    		 //this is one time registration
+		    		 
+		    		 
 		    		 $( MAP ).on( "pageshow", this.show);
 		    		 $( MAP ).on( "pagehide", this.hide);
 		    		 
 		    	 };
 		    	 
 		    	 this.show = function(){
+		    		 
+		    		 directUrlToExternalBrowser("http://maps.google.com/maps" , 'on');
+		    		 directUrlToExternalBrowser("http://www.google.com/intl", 'on');
+		    		 
 		    		 //Load the current session data
 		    		 if(session.currentSearching === 'from'){
 		    			 $(LOCATION).val(session.from);
@@ -104,16 +113,18 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 		    			 if($(this).hasClass($.mobile.activeBtnClass))
 		    			 {
 		    				 $(this).removeClass($.mobile.activeBtnClass);
+		    				 clearInterval(self.timerId);
+		    				 self.timerId = null;
 		    			 }
 		    			 else
 		    			 {
 		    				 $(this).addClass($.mobile.activeBtnClass);	 
 		    				 //Lets start the timer
-		    				 timerId = setInterval(function(){
+		    				 self.timerId = setInterval(function(){
 		    					 navigator.geolocation.getCurrentPosition(self.onGeolocationSuccess, 
 				                           self.onGeolocationError,
 				                           {enableHighAccuracy: true });
-		    				 },1000);
+		    				 },3000);
 		    				 
 		    			 }
 		    			
@@ -127,6 +138,12 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 		    		 //////////////////////////////////////////////////////
 		    		 $(OVERLAY).css('height',self.idealMapHeight());
 		    		 $(OVERLAY).css('max-height',self.idealMapHeight());
+		    		 $(OVERLAY).css('max-width',$(window).outerWidth(true));
+		    		 $(INPUTOVERLAY).css('max-width',$(window).outerWidth(true));
+		    		 $(OVERLAY).css('width',$(window).outerWidth(true));
+		    		 $(INPUTOVERLAY).css('width',$(window).outerWidth(true));
+		    		 $(OVERLAYINPUTSET,$(OVERLAY)).css('max-width',$(window).outerWidth(true));
+		    		 $(OVERLAYINPUTSET ,$(OVERLAY)).css('width',$(window).outerWidth(true));
 		    		 
 		    		 //OVERLAYINPUTSET is absolute positioned so need to move the other
 		    		 //content below that
@@ -196,7 +213,16 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 		    	 };
 		    	 
 		    	 this.hide = function(){
+		    		 
+		    		 directUrlToExternalBrowser("http://maps.google.com/maps" , 'off');
+		    		 directUrlToExternalBrowser("http://www.google.com/intl", 'off');
+		    		 
 		    		 $(DONE).unbind();
+		    		 if(self.timerId != null)
+		    		 {
+		    			clearInterval(self.timerId);
+    				   	self.timerId = null;
+		    		 }
 		    		 $( MAP ).off( "pageshow", self.show);
 		    		 $( MAP ).off( "pagehide", self.hide);
 		    		 
@@ -217,7 +243,7 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 					this.mapOptions = {
 							center: new google.maps.LatLng(-34.397, 150.644),
 							zoom: 8,
-							mapTypeId: google.maps.MapTypeId.ROADMAP,
+							mapTypeId: google.maps.MapTypeId.HYBRID,
 							mapTypeControl:false,
 							scaleControl: false,
 							panControl:false,
@@ -225,6 +251,10 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 							streetViewControl:false
 					};
 					this.map = new google.maps.Map(document.getElementById(id), this.mapOptions);
+					
+					google.maps.event.addListener(this.map,'click',function(){
+						log.info("Maps click event");
+					});
 					
 					this.infoWindow = new google.maps.InfoWindow();
 					
@@ -360,6 +390,23 @@ iam('map',['js/meteron.js','js/log.js', 'js/session.js'],
 						//we can show info window of the place selected 
 					}
 					
+				}
+				
+				function directUrlToExternalBrowser(urlPattern , swtch) 
+				{
+					  var pattern = "a[href^='"+urlPattern+"']";//all urls starting with urlPattern
+					  if(swtch === 'on')
+					  {
+					      $(document).on('click', pattern ,function(e){
+					         e.preventDefault();
+					         meteron.openUrl($(pattern));
+					      
+  					      });
+					  }
+					  else
+					  {
+						  $(document).off('click', pattern); 
+					  }
 				}
 				
 		    	 
